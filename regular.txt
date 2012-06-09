@@ -1,0 +1,5 @@
+stop$  stop()
+
+dwavestop ([0-9]+)   dwavestop(\1)
+dwave (.+)   dwave(\1)
+(.+)(\\)(.+)   \1/\3
