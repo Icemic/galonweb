@@ -7,7 +7,7 @@ lookbackMode=false;
 /*获取脚本*/
 var scriptlines=new Array();
 $.get("/getscript",function(response){scriptlines=response.split('||');});
-scriptNum=0;  <!--用于记录脚本位置，目前无用....-->
+scriptNum=0;  <!--用于记录脚本位置-->
 preloadCount=0;
 imgNum=0;
 textpos_x=180;
@@ -16,6 +16,7 @@ textsize='17';
 textcolor='#fff';
 lookbackcolor='#FFFF33'; /*黄色*/
 lookback_count=0;
+scriptGoOn=true;  <!--存储是否有\符号，控制脚本执行-->
 /*测试用区域开始*/
 imgPreload();
 /*测试用区域结束*/
@@ -23,13 +24,18 @@ imgPreload();
 /*鼠标点击事件*/
 $('canvas').click(function(){
 	if (lookbackMode==true){puttext2();lookbackMode=false;}
-	$('div[id="run"]').html('<script>' + scriptlines[scriptNum] + '</script>');
-	<!-- 定义支持的图片/媒体格式（正则）-->
-	if (scriptlines[scriptNum].search(/\.jpg|\.png|\.bmp|\.ogg|\.wav|\.mp3/i)!=-1){imgNum-=1;if (imgNum<=0){imgPreload();}} /*记录已显示的图片数，判断是否启动预载*/
-	scriptNum+=1;
+	scriptGoOn=true;
+	while (scriptGoOn){
+		$('div[id="run"]').html('<script>' + scriptlines[scriptNum] + '</script>');
+		<!-- 定义支持的图片/媒体格式（正则）-->
+		if (scriptlines[scriptNum].search(/\.jpg|\.png|\.bmp|\.ogg|\.wav|\.mp3/i)!=-1){imgNum-=1;if (imgNum<=0){imgPreload();}} /*记录已显示的图片数，判断是否启动预载*/
+		if (scriptlines[scriptNum].search(/\\/)!=-1){scriptGoOn=false}
+		scriptNum+=1;
+	}
 });
 /*滚轮滚动事件*/
 $('canvas').mousewheel(function(event,delta){
+	if (scriptGoOn){return false;}  <!--阻止动画执行中的事件-->
 	if (delta > 0){  <!--鼠标滚轮向上-->
 	lookback('up');
 	return false;
