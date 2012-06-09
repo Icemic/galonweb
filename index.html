@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>测试～</title>
+	<meta charset="UTF-8">
+	<style type="text/css">
+		canvas#imgLayer {position:absolute;z-index:-1;}
+		canvas#textLayer {position:static;z-index:1;}
+		header,footer {text-align:center;}
+	</style>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+	<!-- CSS加载 -->
+	<!-- 图片预读 -->
+</head>
+<body bgcolor=gray>
+	<header><p>测试</p></header>
+	<div class="display" >
+	<canvas id="imgLayer" width="800px" height="600px" ></canvas>
+	<canvas id="textLayer" width="800px" height="600px" ></canvas>
+	</div>
+	<div class="sound" >
+	<audio id="bgm" name="sound" src="" autoplay="autoplay" loop="loop"></audio>
+	<audio id="dwave-0" name="sound" src="" autoplay="autoplay"></audio>
+	<audio id="dwave-1" name="sound" src="" autoplay="autoplay"></audio>
+	<audio id="dwave-2" name="sound" src="" autoplay="autoplay"></audio>
+	</div>
+<div id="run">
+</div>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+</script>
+<![endif]-->
+<script src="js/front.js"></script>
+<footer>....</footer>
+</body>
+
+</html>

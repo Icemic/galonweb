@@ -1,0 +1,31 @@
+application: galonweb
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+- url: /js
+  static_dir: js
+- url: /ns
+  static_dir: ns
+- url: /e
+  static_dir: data/e
+- url: /w
+  static_dir: data/w
+- url: /se
+  static_dir: data/se
+- url: /bgm
+  static_dir: data/bgm
+- url: /tui2
+  static_dir: data/tui2
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
