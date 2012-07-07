@@ -4,6 +4,7 @@ function setwindow(x,y,wordNum,lineNum,weight,height,wordDist,lineDist,speed,bol
 	maxWeigh=0;
 	for(count=0;count<=wordNum;count++){maxWeigh+=ctx_text.measureText('一').width;}
 settextLayer(x,y,maxWeigh,textsetting.font,speed,bold,shade,winColor_Dir,winX,winY);
+	drawTextPos.status=2
 }
 
 function setwindow2(winColor_Dir){
@@ -14,9 +15,11 @@ function erasetextwindow(num){
 if(num==0){setting.erasetextwindow=false};
 if(num==1){setting.erasetextwindow=true};
 }
-function puttext(text){
+
+
+function puttext_xx(text){
 //检测@及\的存在，并输出。0为不清屏只换行，1为不清屏不换行，2为清屏
-	var pos=text.indexOf('@')
+	var pos=text.indexOf('@');
 	var lastpos=-1;
 	while(pos!=-1 && textCanDrawing){
 		drawText(text.slice(lastpos+1,pos));
@@ -25,7 +28,7 @@ function puttext(text){
 		pos=text.indexOf('@',lastpos+1)
 	}
 
-	pos=text.indexOf('\\')
+	pos=text.indexOf('\\');
 	while(pos!=-1 && textCanDrawing){
 		drawText(text.slice(lastpos+1,pos));
 		drawTextPos.status=2;
@@ -33,8 +36,19 @@ function puttext(text){
 		pos=text.indexOf('\\',lastpos+1);
 	}
 	if(lastpos<text.length && textCanDrawing){drawText(text.slice(lastpos+1));drawTextPos.status=0;}
-	
 }
+
+
+String.prototype.Rtrim=function(){return this.replace(/\s+$/g, "");}
+function puttext(text){
+	switch(text.Rtrim().slice(-1))
+		{
+			case '@':drawText(text.Rtrim().slice(0,-1),1);return false
+			case '\\':drawText(text.Rtrim().slice(0,-1),2);return false
+			default:drawText(text,0);return false
+		}
+}
+
 
 
 

@@ -3,3 +3,5 @@ stop$  stop()
 dwavestop ([0-9]+)   dwavestop(\1)
 dwave (.+)   dwave(\1)
 (.+)(\\)(.+)   \1/\3
+erasetextwindow ([0-9])   erasetextwindow(\1)
+wait ([0-9]+)    wait(\1)
